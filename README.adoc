@@ -2,6 +2,10 @@ image::https://badges.gitter.im/Join%20Chat.svg[Gitter,link=https://gitter.im/sp
 
 image:https://travis-ci.org/spring-projects/spring-security.svg?branch=master["Build Status", link="https://travis-ci.org/spring-projects/spring-security"]
 
+= THIS Fork branch purpose
+Purpose of this branch is to show sample for issue created on github project, https://github.com/spring-projects/spring-framework/issues/23647
+See subproject samples/boot/oauth2login.
+
 = Spring Security
 
 Spring Security provides security services for the https://docs.spring.io[Spring IO Platform]. Spring Security 5.0 requires Spring 5.0 as

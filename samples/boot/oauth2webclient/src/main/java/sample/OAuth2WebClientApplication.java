@@ -29,4 +29,9 @@ public class OAuth2WebClientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OAuth2WebClientApplication.class, args);
 	}
+
+	/*@Bean
+	public ForwardedHeaderFilter forwardedHeaderFilter() {
+		return new ForwardedHeaderFilter();
+	}*/
 }

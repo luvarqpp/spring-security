@@ -1,3 +1,42 @@
+= Fork with issue demonstration
+
+fork of https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2webclient with maven build instead of gradle.
+
+To run, you can use:
+```shell script
+mvn clean spring-boot:run
+```
+
+Than execute on other terminal curl request, which simulates request from nginx reverse proxy:
+
+```shell script
+curl -i http://localhost:18081/oauth2/authorization/client-id \
+    -H 'X-Forwarded-Proto: https' \
+    -H 'X-Forwarded-Server: example.com' \
+    -H 'X-Forwarded-For: 8.8.8.1, 192.168.99.1' \
+    -H 'X-Forwarded-Host: example.com:443' \
+    -H 'X-Forwarded-Prefix: /myDevelApp' \
+    -H 'Forwarded: for=33.33.33.33;host=example.com;proto=https'
+```
+response:
+```shell script
+HTTP/1.1 302
+Set-Cookie: JSESSIONID=27C534EBF6CBA3D677D95D427EFB8409; Path=/; HttpOnly
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Location: https://github.com/login/oauth/authorize?response_type=code&client_id=e92366721d745e77b8f1&scope=read:user%20public_repo&state=0_Mx2odSGYV_Y9bEaUyQndDAlPkoDm-a2D8-s2Y9BA4%3D&redirect_uri=http://localhost:18081/login/oauth2/code/client-id
+Content-Length: 0
+Date: Tue, 24 Sep 2019 13:03:02 GMT
+
+```
+
+I would expect that redirect_uri parameter in location header, will be pointing to example domain, like: https://example.com/myDevelApp/login/oauth2/code/client-id instead of http://localhost:18081/login/oauth2/code/client-id.
+
+
 = OAuth 2.0 WebClient (Servlet) Sample
 
 == GitHub Repositories
