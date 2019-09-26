@@ -18,6 +18,12 @@ package sample;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.reactive.ReactiveOAuth2ClientAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.web.filter.ForwardedHeaderFilter;
+
+import javax.servlet.DispatcherType;
 
 /**
  * @author Joe Grandja
@@ -34,4 +40,13 @@ public class OAuth2WebClientApplication {
 	public ForwardedHeaderFilter forwardedHeaderFilter() {
 		return new ForwardedHeaderFilter();
 	}*/
+
+	@Bean
+	public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
+		ForwardedHeaderFilter filter = new ForwardedHeaderFilter();
+		FilterRegistrationBean<ForwardedHeaderFilter> registration = new FilterRegistrationBean<>(filter);
+		registration.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ASYNC, DispatcherType.ERROR);
+		registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return registration;
+	}
 }

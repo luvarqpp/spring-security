@@ -1,6 +1,6 @@
 server:
   port: 18081
-  forward-headers-strategy: framework
+#  forward-headers-strategy: framework
 
 logging:
   level:
